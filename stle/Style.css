@@ -1,0 +1,107 @@
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+}
+
+.header {
+    color: white;
+    background: linear-gradient(135deg, #221546, #4a2c8c);
+    padding: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    margin-bottom: 5px;
+}
+
+.header nav {
+    margin-top: 10px;
+}
+
+.header a {
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #ddd;
+    transition: 0.3s;
+}
+
+.header a:hover {
+    color: #ffd700;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+
+.content {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+h2 {
+    margin-top: 0;
+}
+
+
+.game, .project {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+
+.game img, .project img {
+    width: 220px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+
+.game img:hover, .project img:hover {
+    transform: scale(1.05);
+}
+
+
+.game div, .project div {
+    flex: 1;
+}
+
+
+.footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer a {
+    color: #4da6ff;
+    text-decoration: none;
+}
+
+
+
+@media (max-width: 768px) {
+
+    .game, .project {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .game img, .project img {
+        width: 100%;
+    }
+
+}

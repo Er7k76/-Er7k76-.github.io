@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portfólio - Gustavo Silva</title>
+
+    <link rel="stylesheet" href="stle/Style.css">
+    <link id="favicon" rel="icon" href="Imagens/frame_00_delay-0.1s.gif">
+
+    <script>
+        let frame = 0
+        const totalFrames = 80
+
+        setInterval(function(){
+            let frameNumber = frame.toString().padStart(2,"0")
+            document.getElementById("favicon").href =
+                "Imagens/frame_" + frameNumber + "_delay-0.1s.gif"
+
+            frame++
+            if(frame >= totalFrames) frame = 0
+        },100)
+    </script>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <h1>O meu Portfólio</h1>
+    <h2>Gustavo Eryk Ramalho Silva</h2>
+
+    <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contactos">Contactos</a>
+    </nav>
+</header>
+
+<!-- CONTEÚDO -->
+<main class="container">
+
+    <!-- SOBRE -->
+    <section id="sobre" class="content">
+        <h2> Sobre mim</h2>
+        <p>
+            Olá! Sou um aluno de VAM com formação em programação.
+            Tenho interesse em desenvolvimento de jogos e tecnologia.
+        </p>
+
+        <h2> Jogos preferidos</h2>
+
+        <div class="game">
+            <h3>Titanfall 2</h3>
+            <img src="Imagens/Titanfal2.JPEG" alt="Titanfall 2">
+        </div>
+
+        <div class="game">
+            <h3>Deadlock</h3>
+            <img src="Imagens/Deadlock.jpeg" alt="Deadlock">
+        </div>
+
+        <div class="game">
+            <h3>Warframe</h3>
+            <img src="Imagens/Warframe.JPEG" alt="Warframe">
+        </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section id="projetos" class="content">
+        <h2> Projetos</h2>
+
+        <div class="project">
+            <h3>Hostile Takeover</h3>
+            <img src="Imagens/Hostile_Takeover.jpeg" alt="Hostile Takeover">
+            <p>Projeto de jogo desenvolvido por mim.</p>
+        </div>
+
+        <div class="project">
+            <h3>Slaughter House</h3>
+            <p>Outro projeto em desenvolvimento.</p>
+        </div>
+    </section>
+
+    <!-- CONTACTOS -->
+    <section id="contactos" class="content">
+        <h2> Contactos</h2>
+        <p><strong>Telefone:</strong> 932 359 231</p>
+        <p><strong>Email:</strong> gustavosi7lva@gmail.com</p>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p> 2026 Gustavo Silva</p>
+    <a href="https://github.com/Er7k76" target="_blank">GitHub</a>
+</footer>
+
+</body>
+</html>
