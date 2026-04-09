@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portfólio - Gustavo Silva</title>
+
+    <link rel="stylesheet" href="stle/Style.css">
+    <link id="favicon" rel="icon" href="Imagens/frame_00_delay-0.1s.gif">
+
+    <script>
+        let frame = 0
+        const totalFrames = 80
+
+        setInterval(function(){
+            let frameNumber = frame.toString().padStart(2,"0")
+            document.getElementById("favicon").href =
+                "Imagens/frame_" + frameNumber + "_delay-0.1s.gif"
+
+            frame++
+            if(frame >= totalFrames) frame = 0
+        },100)
+    </script>
+
+</head>
+
+<body>
+    
+
+    <h1 id="titulo">Olá</h1> 
+
+    
+    <button onclick="mudarTexto()">Clica</button> 
+    <script> 
+        function mudarTexto() { 
+        document.getElementById("titulo").innerText = "Texto alterado!"; 
+        document.getElementById("titulo").style.color = "blue";
+        alert("butao clicado");
+
+
+
+    } 
+</script>
+
+<form action="/Animacoes.html" onsubmit ="algoaconteceu(event)">
+    <label for="algo">Escreva algo:</label>
+    <input type="text" id="algo" name="algo">
+    <input type="submit" value="submit">
+
+    <script>
+        function algoaconteceu(event){
+            event
+            const algotexto = document.getElementById("algo").value
+            alert(algotexto)
+        }
+
+    </script>
+
+    <input.add.>
+
+</form>
+
+
+</body>

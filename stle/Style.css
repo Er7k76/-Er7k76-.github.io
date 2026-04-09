@@ -1,107 +1,92 @@
-
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial;
     background: #f5f7fa;
 }
 
+/* HEADER */
 .header {
-    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
     background: linear-gradient(135deg, #221546, #4a2c8c);
-    padding: 30px;
+    color: white;
     text-align: center;
+    padding: 20px;
+    z-index: 1000;
 }
 
-.header h1 {
-    margin-bottom: 5px;
-}
-
-.header nav {
-    margin-top: 10px;
-}
-
-.header a {
-    margin: 0 10px;
+nav a {
+    color: white;
+    margin: 10px;
     text-decoration: none;
-    font-weight: bold;
-    color: #ddd;
-    transition: 0.3s;
 }
-
-.header a:hover {
-    color: #ffd700;
-}
-
 
 .container {
-    display: flex;
-    flex-direction: column;
+    margin-top: 180px;
     padding: 20px;
 }
 
-
-.content {
-    background: white;
-    border-radius: 12px;
-    padding: 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+/* CARROSSEL */
+.carousel {
+    overflow: hidden;
+    width: 100%;
 }
 
-
-h2 {
-    margin-top: 0;
-}
-
-
-.game, .project {
+.carousel-track {
     display: flex;
-    align-items: center;
+    flex-direction: row;
     gap: 20px;
-    margin-bottom: 25px;
 }
 
-
-.game img, .project img {
-    width: 220px;
-    border-radius: 10px;
-    transition: transform 0.3s;
+/* SLIDES HORIZONTAIS */
+.slide {
+    flex: 0 0 250px;
+    position: relative;
 }
 
-
-.game img:hover, .project img:hover {
-    transform: scale(1.05);
-}
-
-
-.game div, .project div {
-    flex: 1;
-}
-
-
-.footer {
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-.footer a {
-    color: #4da6ff;
+/* LINK OCUPA TODA A IMAGEM */
+.slide a {
+    display: block;
+    position: relative;
     text-decoration: none;
 }
 
+/* IMAGEM */
+.slide img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
 
+/* 🔥 HOVER EM TODA A IMAGEM */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    opacity: 0;
+    transition: 0.3s;
+    border-radius: 10px;
+}
 
-@media (max-width: 768px) {
+/* aparece em qualquer parte do hover */
+.slide a:hover .overlay {
+    opacity: 1;
+}
 
-    .game, .project {
-        flex-direction: column;
-        text-align: center;
+/* MOBILE */
+@media (max-width: 768px){
+    .slide {
+        flex: 0 0 80%;
     }
-
-    .game img, .project img {
-        width: 100%;
-    }
-
 }

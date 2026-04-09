@@ -1,27 +1,110 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio - Gustavo</title>
 
-    <title>Portfólio - Gustavo Silva</title>
+<link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="stle/Style.css">
-    <link id="favicon" rel="icon" href="Imagens/frame_00_delay-0.1s.gif">
+<script>
+const API_KEY = "1abc96ce2acb4f90881fa341da1fcda8";
 
-    <script>
-        let frame = 0
-        const totalFrames = 80
+// LISTA DOS TEUS JOGOS
+const favoritos = ["Warframe", "Titanfall 2", "Deadlock"];
 
-        setInterval(function(){
-            let frameNumber = frame.toString().padStart(2,"0")
-            document.getElementById("favicon").href =
-                "Imagens/frame_" + frameNumber + "_delay-0.1s.gif"
+// GUARDAR DADOS
+let gamesData = [];
 
-            frame++
-            if(frame >= totalFrames) frame = 0
-        },100)
-    </script>
+// AO CARREGAR
+window.onload = async () => {
+
+    document.getElementById("loading").style.display = "block";
+
+    for (let nome of favoritos) {
+        let res = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}&search=${nome}`);
+        let data = await res.json();
+
+        if (data.results.length > 0) {
+            gamesData.push(data.results[0]);
+        }
+    }
+
+    document.getElementById("loading").style.display = "none";
+    mostrarFavoritos();
+};
+
+// MOSTRAR JOGOS
+function mostrarFavoritos() {
+    const container = document.getElementById("favoritosContainer");
+    container.innerHTML = "";
+
+    gamesData.forEach(game => {
+
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <img src="${game.background_image}">
+            <div class="overlay">
+                <h3>${game.name}</h3>
+                <p>⭐ ${game.rating}</p>
+            </div>
+            <button class="fav-btn">⭐</button>
+        `;
+
+        // CLICK → MODAL
+        div.onclick = () => abrirModal(game);
+
+        container.appendChild(div);
+    });
+}
+
+// MODAL
+function abrirModal(game) {
+    document.getElementById("modal").style.display = "block";
+    document.getElementById("modalTitle").innerText = game.name;
+    document.getElementById("modalImg").src = game.background_image;
+    document.getElementById("modalInfo").innerText =
+        "⭐ " + game.rating + " | 📅 " + game.released;
+}
+
+function fecharModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+// PESQUISA
+function pesquisar() {
+    let input = document.getElementById("search").value.toLowerCase();
+
+    let filtrados = gamesData.filter(g =>
+        g.name.toLowerCase().includes(input)
+    );
+
+    const container = document.getElementById("favoritosContainer");
+    container.innerHTML = "";
+
+    filtrados.forEach(g => {
+        let div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <img src="${g.background_image}">
+            <div class="overlay">
+                <h3>${g.name}</h3>
+            </div>
+        `;
+
+        div.onclick = () => abrirModal(g);
+        container.appendChild(div);
+    });
+}
+
+// DARK MODE
+function toggleTheme() {
+    document.body.classList.toggle("dark");
+}
+</script>
 
 </head>
 
@@ -29,75 +112,67 @@
 
 <!-- HEADER -->
 <header class="header">
-    <h1>O meu Portfólio</h1>
-    <h2>Gustavo Eryk Ramalho Silva</h2>
+    <h1>Portfólio</h1>
 
     <nav>
         <a href="#sobre">Sobre</a>
+        <a href="#favoritos">Jogos</a>
         <a href="#projetos">Projetos</a>
         <a href="#contactos">Contactos</a>
     </nav>
+
+    <!-- PESQUISA -->
+    <input type="text" id="search" placeholder="Pesquisar..." onkeyup="pesquisar()">
+
+    <button onclick="toggleTheme()">🌙</button>
 </header>
 
-<!-- CONTEÚDO -->
 <main class="container">
 
-    <!-- SOBRE -->
-    <section id="sobre" class="content">
-        <h2> Sobre mim</h2>
-        <p>
-            Olá! Sou um aluno de VAM com formação em programação.
-            Tenho interesse em desenvolvimento de jogos e tecnologia.
-        </p>
+<!-- SOBRE -->
+<section id="sobre" class="content fade-in">
+<h2>Sobre mim</h2>
+<p>Aluno interessado em programação e desenvolvimento de jogos.</p>
+</section>
 
-        <h2> Jogos preferidos</h2>
+<!-- FAVORITOS COM API -->
+<section id="favoritos" class="content fade-in">
+<h2>Jogos Preferidos</h2>
 
-        <div class="game">
-            <h3>Titanfall 2</h3>
-            <img src="Imagens/Titanfal2.JPEG" alt="Titanfall 2">
-        </div>
+<div id="loading">A carregar jogos...</div>
 
-        <div class="game">
-            <h3>Deadlock</h3>
-            <img src="Imagens/Deadlock.jpeg" alt="Deadlock">
-        </div>
+<div id="favoritosContainer" class="grid"></div>
+</section>
 
-        <div class="game">
-            <h3>Warframe</h3>
-            <img src="Imagens/Warframe.JPEG" alt="Warframe">
-        </div>
-    </section>
+<!-- PROJETOS -->
+<section id="projetos" class="content fade-in">
+<h2>Projetos</h2>
 
-    <!-- PROJETOS -->
-    <section id="projetos" class="content">
-        <h2> Projetos</h2>
+<div class="grid">
+<a href="Projetos/HostileTakeover.html" class="card-link">
+<img src="Imagens/Hostile_Takeover.jpeg">
+<p>Hostile Takeover</p>
+</a>
+</div>
+</section>
 
-        <div class="project">
-            <h3>Hostile Takeover</h3>
-            <img src="Imagens/Hostile_Takeover.jpeg" alt="Hostile Takeover">
-            <p>Projeto de jogo desenvolvido por mim.</p>
-        </div>
-
-        <div class="project">
-            <h3>Slaughter House</h3>
-            <p>Outro projeto em desenvolvimento.</p>
-        </div>
-    </section>
-
-    <!-- CONTACTOS -->
-    <section id="contactos" class="content">
-        <h2> Contactos</h2>
-        <p><strong>Telefone:</strong> 932 359 231</p>
-        <p><strong>Email:</strong> gustavosi7lva@gmail.com</p>
-    </section>
+<!-- CONTACTOS -->
+<section id="contactos" class="content fade-in">
+<h2>Contactos</h2>
+<p>Email: gustavosi7lva@gmail.com</p>
+</section>
 
 </main>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p> 2026 Gustavo Silva</p>
-    <a href="https://github.com/Er7k76" target="_blank">GitHub</a>
-</footer>
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="modal-content">
+<span onclick="fecharModal()" class="close">&times;</span>
+<h2 id="modalTitle"></h2>
+<img id="modalImg">
+<p id="modalInfo"></p>
+</div>
+</div>
 
 </body>
 </html>
