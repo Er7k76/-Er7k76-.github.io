@@ -5,32 +5,38 @@ body {
     color: white;
 }
 
-
 body.dark {
     background: #f5f7fa;
     color: #111;
 }
 
-
+/* HEADER */
 .header {
     position: fixed;
     top: 0;
     width: 100%;
     background: linear-gradient(135deg, #221546, #4a2c8c);
-    color: white;
     text-align: center;
     padding: 20px;
     z-index: 1000;
-    backdrop-filter: blur(10px);
 }
 
+/* RELÓGIO */
+.clock {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-weight: bold;
+}
+
+/* NAV */
 nav a {
     color: white;
     margin: 10px;
     text-decoration: none;
 }
 
-
+/* BOTÃO TEMA */
 .themeBtn {
     position: absolute;
     right: 20px;
@@ -43,7 +49,7 @@ nav a {
     border-radius: 6px;
 }
 
-
+/* CONTAINER */
 .container {
     margin-top: 180px;
     max-width: 1100px;
@@ -52,15 +58,9 @@ nav a {
     padding: 20px;
 }
 
-
-h2 {
-    margin-bottom: 15px;
-}
-
-
+/* CARROSSEL */
 .carousel {
     overflow: hidden;
-    width: 100%;
     display: flex;
     justify-content: center;
     padding: 20px 0;
@@ -71,12 +71,10 @@ h2 {
     gap: 20px;
 }
 
-
 .slide {
     flex: 0 0 250px;
     position: relative;
 }
-
 
 .slide img {
     width: 250px;
@@ -86,20 +84,7 @@ h2 {
     box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-
-.slide:hover {
-    animation: wobble 0.6s ease;
-}
-
-@keyframes wobble {
-    0% { transform: rotate(0deg) scale(1); }
-    25% { transform: rotate(3deg) scale(1.05); }
-    50% { transform: rotate(-3deg) scale(1.05); }
-    75% { transform: rotate(2deg) scale(1.05); }
-    100% { transform: rotate(0deg) scale(1); }
-}
-
-
+/* OVERLAY */
 .overlay {
     position: absolute;
     top: 0;
@@ -115,12 +100,11 @@ h2 {
     transition: 0.3s;
 }
 
-.slide a:hover .overlay,
-.slide a:active .overlay {
+.slide a:hover .overlay {
     opacity: 1;
 }
 
-
+/* ANIMAÇÃO */
 .fade-in {
     animation: fade 1s ease;
 }
@@ -136,7 +120,7 @@ h2 {
     }
 }
 
-
+/* RESPONSIVO */
 @media (max-width: 768px){
     .slide {
         flex: 0 0 80%;
@@ -146,29 +130,4 @@ h2 {
     .overlay {
         width: 100%;
     }
-}
-
-
-.page-img {
-    width: 100%;
-    max-width: 600px;
-    border-radius: 12px;
-    display: block;
-    margin: 20px auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-
-.btn {
-    display: inline-block;
-    padding: 10px 15px;
-    background: #6c4cff;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #8a6dff;
 }
