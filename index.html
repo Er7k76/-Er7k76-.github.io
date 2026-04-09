@@ -3,176 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfólio - Gustavo</title>
 
-<link rel="stylesheet" href="style.css">
+<title>Portfólio - Gustavo Silva</title>
+
+<link rel="stylesheet" href="stle/Style.css">
 
 <script>
-const API_KEY = "1abc96ce2acb4f90881fa341da1fcda8";
 
-// LISTA DOS TEUS JOGOS
-const favoritos = ["Warframe", "Titanfall 2", "Deadlock"];
 
-// GUARDAR DADOS
-let gamesData = [];
+function toggleTheme(){
+    document.body.classList.toggle("dark")
+}
 
-// AO CARREGAR
-window.onload = async () => {
 
-    document.getElementById("loading").style.display = "block";
+function startCarousel(trackId){
+    const track = document.getElementById(trackId)
 
-    for (let nome of favoritos) {
-        let res = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}&search=${nome}`);
-        let data = await res.json();
+    function move(){
+        const first = track.children[0]
 
-        if (data.results.length > 0) {
-            gamesData.push(data.results[0]);
-        }
+        track.style.transition = "transform 0.5s ease"
+        track.style.transform = "translateX(-270px)"
+
+        setTimeout(() => {
+            track.style.transition = "none"
+            track.appendChild(first)
+            track.style.transform = "translateX(0px)"
+        }, 500)
     }
 
-    document.getElementById("loading").style.display = "none";
-    mostrarFavoritos();
-};
-
-// MOSTRAR JOGOS
-function mostrarFavoritos() {
-    const container = document.getElementById("favoritosContainer");
-    container.innerHTML = "";
-
-    gamesData.forEach(game => {
-
-        const div = document.createElement("div");
-        div.className = "card";
-
-        div.innerHTML = `
-            <img src="${game.background_image}">
-            <div class="overlay">
-                <h3>${game.name}</h3>
-                <p>⭐ ${game.rating}</p>
-            </div>
-            <button class="fav-btn">⭐</button>
-        `;
-
-        // CLICK → MODAL
-        div.onclick = () => abrirModal(game);
-
-        container.appendChild(div);
-    });
+    setInterval(move, 2500)
 }
 
-// MODAL
-function abrirModal(game) {
-    document.getElementById("modal").style.display = "block";
-    document.getElementById("modalTitle").innerText = game.name;
-    document.getElementById("modalImg").src = game.background_image;
-    document.getElementById("modalInfo").innerText =
-        "⭐ " + game.rating + " | 📅 " + game.released;
+window.onload = () => {
+    startCarousel("gamesTrack")
+    startCarousel("projectsTrack")
 }
 
-function fecharModal() {
-    document.getElementById("modal").style.display = "none";
-}
-
-// PESQUISA
-function pesquisar() {
-    let input = document.getElementById("search").value.toLowerCase();
-
-    let filtrados = gamesData.filter(g =>
-        g.name.toLowerCase().includes(input)
-    );
-
-    const container = document.getElementById("favoritosContainer");
-    container.innerHTML = "";
-
-    filtrados.forEach(g => {
-        let div = document.createElement("div");
-        div.className = "card";
-
-        div.innerHTML = `
-            <img src="${g.background_image}">
-            <div class="overlay">
-                <h3>${g.name}</h3>
-            </div>
-        `;
-
-        div.onclick = () => abrirModal(g);
-        container.appendChild(div);
-    });
-}
-
-// DARK MODE
-function toggleTheme() {
-    document.body.classList.toggle("dark");
-}
 </script>
 
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
-    <h1>Portfólio</h1>
+    <h1>O meu Portfólio</h1>
+    <h2>Gustavo Eryk Ramalho Silva</h2>
+
+    <button class="themeBtn" onclick="toggleTheme()"> Tema</button>
 
     <nav>
         <a href="#sobre">Sobre</a>
-        <a href="#favoritos">Jogos</a>
+        <a href="#jogos">Jogos</a>
         <a href="#projetos">Projetos</a>
         <a href="#contactos">Contactos</a>
     </nav>
-
-    <!-- PESQUISA -->
-    <input type="text" id="search" placeholder="Pesquisar..." onkeyup="pesquisar()">
-
-    <button onclick="toggleTheme()">🌙</button>
 </header>
 
 <main class="container">
 
-<!-- SOBRE -->
-<section id="sobre" class="content fade-in">
-<h2>Sobre mim</h2>
-<p>Aluno interessado em programação e desenvolvimento de jogos.</p>
+<section id="sobre" class="fade-in">
+    <h2>Sobre mim</h2>
+    <p>
+        Sou um estudante de VAM com interesse em desenvolvimento de jogos,
+        especialmente em sofrer com o c++ da unreal engine. Larper!
+    </p>
 </section>
 
-<!-- FAVORITOS COM API -->
-<section id="favoritos" class="content fade-in">
-<h2>Jogos Preferidos</h2>
 
-<div id="loading">A carregar jogos...</div>
+<section id="jogos" class="fade-in">
+    <h2>Jogos Preferidos</h2>
 
-<div id="favoritosContainer" class="grid"></div>
+    <div class="carousel">
+        <div class="carousel-track" id="gamesTrack">
+
+            <div class="slide">
+                <a href="Jogos/Warframe.html">
+                    <img src="Imagens/Warframe.JPEG">
+                    <div class="overlay">Warframe</div>
+                </a>
+            </div>
+
+            <div class="slide">
+                <a href="Jogos/Titanfall.html">
+                    <img src="Imagens/Titanfal2.JPEG">
+                    <div class="overlay">Titanfall 2</div>
+                </a>
+            </div>
+
+            <div class="slide">
+                <a href="Jogos/Deadlock.html">
+                    <img src="Imagens/Deadlock.jpeg">
+                    <div class="overlay">Deadlock</div>
+                </a>
+            </div>
+
+        </div>
+    </div>
 </section>
 
-<!-- PROJETOS -->
-<section id="projetos" class="content fade-in">
-<h2>Projetos</h2>
 
-<div class="grid">
-<a href="Projetos/HostileTakeover.html" class="card-link">
-<img src="Imagens/Hostile_Takeover.jpeg">
-<p>Hostile Takeover</p>
-</a>
-</div>
+<section id="projetos" class="fade-in">
+    <h2>Projetos</h2>
+
+    <div class="carousel">
+        <div class="carousel-track" id="projectsTrack">
+
+            <div class="slide">
+                <a href="Jogos/HostileTakeover.html">
+                    <img src="Imagens/Hostile_Takeover.jpeg">
+                    <div class="overlay">Hostile Takeover</div>
+                </a>
+            </div>
+
+            <div class="slide">
+                <a href="Jogos/SlaughterHouse.html">
+                    <img src="Imagens/4HPN3P.png">
+                    <div class="overlay">Slaughter House</div>
+                </a>
+            </div>
+
+            <div class="slide">
+                <a href="Jogos/CrouchSlop.html">
+                    <img src="Imagens/Crouch_Cripted.PNG">
+                    <div class="overlay">CrouchSlop</div>
+                </a>
+            </div>
+
+        </div>
+    </div>
 </section>
 
-<!-- CONTACTOS -->
-<section id="contactos" class="content fade-in">
-<h2>Contactos</h2>
-<p>Email: gustavosi7lva@gmail.com</p>
+<section id="contactos" class="fade-in">
+    <h2>Contactos</h2>
+    <p>Email: gustavosi7lva@gmail.com</p>
+    <p>Telefone: 932 359 231</p>
 </section>
 
 </main>
-
-<!-- MODAL -->
-<div id="modal" class="modal">
-<div class="modal-content">
-<span onclick="fecharModal()" class="close">&times;</span>
-<h2 id="modalTitle"></h2>
-<img id="modalImg">
-<p id="modalInfo"></p>
-</div>
-</div>
 
 </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Deadlock</title>
+
+<style>
+body { background:#111; color:white; text-align:center; }
+</style>
+
+<script>
+const API_KEY = "1abc96ce2acb4f90881fa341da1fcda8";
+
+async function loadGame(){
+    const res = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}&search=Deadlock`);
+    const data = await res.json();
+    const game = data.results[0];
+
+    document.getElementById("info").innerHTML =
+        `<p>Lançamento: ${game.released}</p>
+         <p>Rating:  ${game.rating}</p>`;
+}
+
+window.onload = loadGame;
+</script>
+
+</head>
+<body>
+
+<h1>Deadlock</h1>
+
+<div id="info">A carregar...</div>
+
+<br><br>
+<a href="../Index.html">⬅ Voltar</a>
+
+</body>
+</html>
